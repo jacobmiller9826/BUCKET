@@ -4,6 +4,11 @@ body {
   background: black;
   color: #e00000;
   font-family: 'Orbitron', sans-serif;
+  transition: filter 0.5s ease;
+}
+
+.inverted {
+  filter: invert(1) hue-rotate(180deg);
 }
 
 .store-nav {
@@ -17,9 +22,19 @@ body {
 
 .store-nav h1 {
   font-size: 1.8rem;
-  color: #e00000;
   letter-spacing: 3px;
   margin: 0;
+}
+
+.glitch {
+  animation: glitchAnim 1s infinite;
+  text-shadow: 0 0 5px red;
+}
+
+@keyframes glitchAnim {
+  0% { text-shadow: 2px 2px red, -2px -2px blue; }
+  50% { text-shadow: -1px 2px red, 2px -1px blue; }
+  100% { text-shadow: 2px -2px red, -2px 2px blue; }
 }
 
 .store-nav div a {
@@ -33,6 +48,13 @@ body {
 
 .store-nav div a:hover {
   color: #ff4444;
+}
+
+.ritual-timer {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #ff3333;
 }
 
 main {
@@ -65,8 +87,8 @@ section {
   transition: transform 0.3s ease;
 }
 
-.product-card:hover {
-  transform: scale(1.05) rotate(-0.5deg);
+.glitch-hover:hover {
+  animation: glitchAnim 0.6s infinite;
 }
 
 .product-img {
@@ -106,7 +128,6 @@ button:hover {
   color: black;
 }
 
-/* Modal styles */
 .modal {
   position: fixed;
   top: 0; left: 0;
