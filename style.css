@@ -26,6 +26,16 @@ body {
   margin: 0;
 }
 
+.store-nav h1 a.home-link {
+  color: #e00000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.store-nav h1 a.home-link:hover {
+  color: #ff4444;
+}
+
 .glitch {
   animation: glitchAnim 1s infinite;
   text-shadow: 0 0 5px red;
