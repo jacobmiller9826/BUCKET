@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BUCKET – Art & Clothing</title>
-  <link rel="stylesheet" href="style.css">
+  <title>BUCKET Store</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <nav class="store-nav">
@@ -19,6 +19,22 @@
     <section id="art"><h2>Art</h2><p>Dark visions from the edge...</p></section>
     <section id="clothing"><h2>Clothing</h2><p>Wear the void.</p></section>
     <section id="about"><h2>About</h2><p>BUCKET is the embodiment of the Sith desert aesthetic.</p></section>
+    <button id="installBtn" style="display:none;">📲 Install BUCKET</button>
   </main>
+  <script>
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'inline-block';
+    });
+    installBtn.addEventListener('click', () => {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => {
+        installBtn.style.display = 'none';
+      });
+    });
+  </script>
 </body>
 </html>
