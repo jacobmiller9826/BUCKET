@@ -1,9 +1,15 @@
 {
-  "name": "BUCKET",
+  "name": "BUCKET Store",
   "short_name": "BUCKET",
-  "start_url": "main.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#e00000",
-  "icons": []
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
 }
