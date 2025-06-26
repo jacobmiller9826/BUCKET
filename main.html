@@ -1,62 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BUCKET</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="icon.png" />
-  <script defer src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BUCKET – Art & Clothing</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <script>
-    if (!localStorage.getItem("bucketTemplePassed")) {
-      window.location.href = "index.html";
-    }
-  </script>
-
-  <header class="app-header">
-    <h1 class="app-logo">BUCKET</h1>
-    <nav class="app-nav">
+  <nav class="store-nav">
+    <h1>BUCKET</h1>
+    <div>
       <a href="#art">Art</a>
       <a href="#clothing">Clothing</a>
       <a href="#about">About</a>
-    </nav>
-  </header>
-
+    </div>
+  </nav>
   <main>
-    <section class="app-section" id="art">
-      <h2>Art</h2>
-      <div class="gallery">
-        <div class="art-card">🖤 Dark Side Collage</div>
-        <div class="art-card">🌑 Galactic Pain</div>
-        <div class="art-card">🔥 Sith Ritual</div>
-      </div>
-    </section>
-
-    <section class="app-section" id="clothing">
-      <h2>Clothing</h2>
-      <div class="products">
-        <div class="product">
-          <h3>Shadow Tee</h3>
-          <button>Buy</button>
-        </div>
-        <div class="product">
-          <h3>Crimson Hoodie</h3>
-          <button>Buy</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="app-section" id="about">
-      <h2>About</h2>
-      <p>BUCKET is a Sith-born design label. Glitch aesthetics. Deadly fashion. Powered by the dark side of the Force. Built for the underground, made for the future.</p>
-    </section>
+    <section id="art"><h2>Art</h2><p>Dark visions from the edge...</p></section>
+    <section id="clothing"><h2>Clothing</h2><p>Wear the void.</p></section>
+    <section id="about"><h2>About</h2><p>BUCKET is the embodiment of the Sith desert aesthetic.</p></section>
   </main>
-
-  <footer class="footer">
-    <p>&copy; 2025 BUCKET. Built with shadow and style.</p>
-  </footer>
 </body>
 </html>
