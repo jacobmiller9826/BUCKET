@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+body {
+  margin: 0;
+  background: black;
+  color: #e00000;
+  font-family: 'Orbitron', sans-serif;
+  overflow-x: hidden;
+}
+
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background: radial-gradient(#100000, black);
+}
+
+.logo {
+  font-size: 4rem;
+  letter-spacing: 8px;
+  text-shadow: 0 0 20px red;
+}
+
+.tagline {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.gallery, .products {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+img {
+  width: 250px;
+  height: auto;
+  border: 2px solid #e00000;
+  box-shadow: 0 0 10px #e00000;
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.05);
+}
+
+.product button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: transparent;
+  color: #e00000;
+  border: 2px solid #e00000;
+  font-family: 'Orbitron', sans-serif;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.product button:hover {
+  background: #e00000;
+  color: black;
+}
+
+.reaper img {
+  width: 200px;
+  margin: 20px 0;
+  filter: grayscale(1);
+}
+
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  background: #0a0a0a;
+  color: #880000;
+  font-size: 0.9rem;
+}
+
+/* Custom cursor */
+#cursor {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 0 10px red;
+  transform: translate(-50%, -50%);
+}
