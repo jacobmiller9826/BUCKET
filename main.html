@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BUCKET Store</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
 </head>
 <body>
   <nav class="store-nav">
@@ -15,26 +16,124 @@
       <a href="#about">About</a>
     </div>
   </nav>
+
   <main>
-    <section id="art"><h2>Art</h2><p>Dark visions from the edge...</p></section>
-    <section id="clothing"><h2>Clothing</h2><p>Wear the void.</p></section>
-    <section id="about"><h2>About</h2><p>BUCKET is the embodiment of the Sith desert aesthetic.</p></section>
+    <section id="art">
+      <h2>Art</h2>
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-img sith-art-1"></div>
+          <h3>“Desert Sith #1”</h3>
+          <p class="price">$40</p>
+          <button onclick="purchase('bucketToken_art1', 'https://buy.stripe.com/test_sith_art')">Buy</button>
+        </div>
+        <div class="product-card">
+          <div class="product-img sith-art-2"></div>
+          <h3>“Temple Glitch”</h3>
+          <p class="price">$60</p>
+          <button onclick="purchase('bucketToken_art2', 'https://buy.stripe.com/test_glitch_art')">Buy</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="clothing">
+      <h2>Clothing</h2>
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-img sith-shirt"></div>
+          <h3>“Dark Desert Tee”</h3>
+          <p class="price">$30</p>
+          <button onclick="purchase('bucketToken_cloth1', 'https://buy.stripe.com/test_dark_tee')">Buy</button>
+        </div>
+        <div class="product-card">
+          <div class="product-img red-hood"></div>
+          <h3>“Crimson Hood”</h3>
+          <p class="price">$50</p>
+          <button onclick="purchase('bucketToken_cloth2', 'https://buy.stripe.com/test_crimson_hood')">Buy</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="unlocked" style="display:none;">
+      <h2>🔓 Unlocked</h2>
+      <div id="unlockedItems"></div>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>BUCKET is a Sith-temple inspired art and clothing label. We channel grim desert aesthetics, glitch culture, and spiritual darkness into wearable and visual statements.</p>
+    </section>
+
     <button id="installBtn" style="display:none;">📲 Install BUCKET</button>
   </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <p>Proceed to complete your purchase?</p>
+      <button id="modalBuyBtn">Buy Now</button>
+    </div>
+  </div>
+
   <script>
-    let deferredPrompt;
-    const installBtn = document.getElementById('installBtn');
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installBtn.style.display = 'inline-block';
-    });
-    installBtn.addEventListener('click', () => {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(() => {
-        installBtn.style.display = 'none';
+    const unlocks = {
+      bucketToken_art1: "🖼 Hidden Art: <a href='#'>Desert Sith Canvas</a>",
+      bucketToken_art2: "💀 Glitch Scroll: Temple Corruption Logs",
+      bucketToken_cloth1: "🎧 Chant Loop: Dark Desert Mix",
+      bucketToken_cloth2: "📖 Crimson Code Archive"
+    };
+
+    function purchase(token, url) {
+      localStorage.setItem(token, "true");
+      showUnlocked();
+      openModal(url);
+    }
+
+    function showUnlocked() {
+      const container = document.getElementById("unlockedItems");
+      container.innerHTML = "";
+      let hasUnlock = false;
+      for (const token in unlocks) {
+        if (localStorage.getItem(token)) {
+          hasUnlock = true;
+          const div = document.createElement("div");
+          div.innerHTML = unlocks[token];
+          container.appendChild(div);
+        }
+      }
+      if (hasUnlock) document.getElementById("unlocked").style.display = "block";
+    }
+
+    function openModal(link) {
+      const modal = document.getElementById("modal");
+      const btn = document.getElementById("modalBuyBtn");
+      modal.classList.remove("hidden");
+      btn.onclick = () => {
+        window.open(link, "_blank");
+        modal.classList.add("hidden");
+      };
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.add("hidden");
+    }
+
+    window.onload = () => {
+      showUnlocked();
+      let deferredPrompt;
+      const installBtn = document.getElementById('installBtn');
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installBtn.style.display = 'inline-block';
       });
-    });
+      installBtn.addEventListener('click', () => {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(() => {
+          installBtn.style.display = 'none';
+        });
+      });
+    };
   </script>
 </body>
 </html>
