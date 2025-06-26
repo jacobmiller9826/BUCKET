@@ -1,96 +1,11 @@
-/* Base styles for all pages */
 body {
   margin: 0;
   padding: 0;
   background: black;
   color: #e00000;
   font-family: 'Orbitron', sans-serif;
-  overflow-x: hidden;
 }
 
-/* Fade-out animation for page transitions */
-body.fade-out {
-  animation: fadeOut 1s forwards;
-}
-
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-  }
-}
-
-/* Ritual Loader Styles */
-.ritual-loader {
-  text-align: center;
-  animation: flicker 2s infinite;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.sith-symbol {
-  font-size: 6rem;
-  animation: pulse-glow 1.5s infinite alternate;
-  text-shadow: 0 0 10px red, 0 0 20px red, 0 0 40px crimson;
-}
-
-.ritual-chant {
-  font-size: 1.2rem;
-  margin-top: 12px;
-  animation: fadein 3s ease-in-out infinite alternate;
-}
-
-.grim-reapers {
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-}
-
-.grim {
-  font-size: 3rem;
-  animation: floaty 4s ease-in-out infinite;
-}
-
-.grim:nth-child(2) {
-  animation-delay: 1s;
-}
-
-.grim:nth-child(3) {
-  animation-delay: 2s;
-}
-
-/* Ritual Animations */
-@keyframes pulse-glow {
-  0% { transform: scale(1); opacity: 0.9; }
-  100% { transform: scale(1.1); opacity: 1; }
-}
-
-@keyframes flicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-@keyframes fadein {
-  0% { opacity: 0.3; }
-  100% { opacity: 1; }
-}
-
-@keyframes floaty {
-  0% { transform: translateY(0px); opacity: 0.9; }
-  50% { transform: translateY(-20px); opacity: 1; }
-  100% { transform: translateY(0px); opacity: 0.9; }
-}
-
-/* Glitch text effect */
-.glitch-end {
-  animation: glitchText 0.8s infinite;
-  text-shadow: 0 0 10px red, 2px 2px crimson;
-}
-
-/* Nav styles for main.html */
 .store-nav {
   background-color: #120000;
   padding: 1rem 2rem;
@@ -120,7 +35,6 @@ body.fade-out {
   color: #ff4444;
 }
 
-/* Main content styles */
 main {
   padding: 2rem;
   max-width: 900px;
@@ -130,12 +44,51 @@ main {
   color: #ff5555;
 }
 
-/* Sections */
 section {
   margin-bottom: 3rem;
 }
 
-/* Buttons */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.product-card {
+  border: 2px solid crimson;
+  padding: 1rem;
+  background: #110000;
+  text-align: center;
+  box-shadow: 0 0 20px #e0000055;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.05) rotate(-0.5deg);
+}
+
+.product-img {
+  height: 180px;
+  margin-bottom: 1rem;
+  background: repeating-linear-gradient(
+    45deg,
+    #1a0000,
+    #1a0000 10px,
+    #2e0000 10px,
+    #2e0000 20px
+  );
+  border: 2px solid red;
+  border-radius: 4px;
+}
+
+.price {
+  font-size: 1.1rem;
+  color: #ff4444;
+  margin: 0.5rem 0 1rem;
+}
+
 button {
   background: #330000;
   border: 2px solid #e00000;
@@ -153,45 +106,41 @@ button:hover {
   color: black;
 }
 
-/* Game intro screen specific styles */
-#intro {
-  position: absolute;
+/* Modal styles */
+.modal {
+  position: fixed;
   top: 0; left: 0;
-  width: 100%; height: 100%;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  background: black;
-  z-index: 2;
-  color: crimson;
-  font-family: 'Orbitron', sans-serif;
+  z-index: 10;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #1a0000;
+  padding: 2rem;
+  border: 2px solid crimson;
   text-align: center;
-  user-select: none;
+  color: #ff4444;
+  box-shadow: 0 0 30px red;
 }
 
-#intro button {
-  margin: 10px;
-  padding: 10px 20px;
-  background: darkred;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 1.1rem;
+.modal-content button {
+  margin-top: 1rem;
 }
 
-/* Canvas for game */
-canvas {
+.modal .close {
   position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  z-index: 0;
-}
-
-/* Fade out animation for page transitions */
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-  }
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: crimson;
+  cursor: pointer;
 }
