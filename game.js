@@ -5,15 +5,47 @@ canvas.height = window.innerHeight;
 
 let gameStarted = false;
 let timeSurvived = 0;
-let player = { x: 100, y: canvas.height / 2, r: 10, vx: 0, vy: 0 };
 let keys = {};
 const audio = document.getElementById("sithAudio");
 
-function drawPlayer() {
-  ctx.beginPath();
-  ctx.arc(player.x, player.y, player.r, 0, Math.PI * 2);
-  ctx.fillStyle = "#e00000";
-  ctx.fill();
+const player = {
+  x: 100,
+  y: canvas.height / 2,
+  vx: 0,
+  vy: 0,
+  size: 10
+};
+
+// Draw 8-bit Sith sprite with colored squares on canvas
+function drawPixelSith(x, y) {
+  const pixel = (dx, dy, color) => {
+    ctx.fillStyle = color;
+    ctx.fillRect(x + dx * 4, y + dy * 4, 4, 4);
+  };
+
+  pixel(0, 0, "black");
+  pixel(1, 0, "red");
+  pixel(2, 0, "black");
+
+  pixel(0, 1, "red");
+  pixel(1, 1, "black");
+  pixel(2, 1, "red");
+
+  pixel(0, 2, "red");
+  pixel(1, 2, "red");
+  pixel(2, 2, "red");
+
+  pixel(1, 3, "red");
+  pixel(1, 4, "red");
+
+  pixel(0, 4, "black");
+  pixel(2, 4, "black");
+
+  // Lightsaber blade effect
+  for (let i = -5; i < 0; i++) {
+    ctx.fillStyle = "rgba(255,0,0,0.7)";
+    ctx.fillRect(x + 6, y + i * 4, 2, 4);
+  }
 }
 
 function updatePlayer() {
@@ -29,12 +61,13 @@ function updatePlayer() {
 
 function drawObstacles() {
   ctx.fillStyle = "rgba(255,0,0,0.1)";
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 40; i++) {
     let x = Math.sin((Date.now() + i * 2000) / 1000) * canvas.width / 3 + canvas.width / 2;
-    let y = (i * 150 + Date.now() / 3) % canvas.height;
+    let y = (i * 150 + Date.now() / 2) % canvas.height;
     ctx.beginPath();
     ctx.arc(x, y, 20, 0, Math.PI * 2);
     ctx.fill();
+
     if (Math.hypot(player.x - x, player.y - y) < 30) {
       gameOver();
     }
@@ -55,20 +88,21 @@ function win() {
 
 function loop() {
   if (!gameStarted) return;
-  ctx.fillStyle = "rgba(0,0,0,0.2)";
+  ctx.fillStyle = "rgba(0,0,0,0.3)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  drawPlayer();
+
   updatePlayer();
   drawObstacles();
+  drawPixelSith(player.x, player.y);
 
   timeSurvived += 16;
-  if (timeSurvived > 20000) win(); // 20s
+  if (timeSurvived > 20000) win();
 
   requestAnimationFrame(loop);
 }
 
 document.getElementById("startBtn").addEventListener("click", () => {
-  document.querySelector(".overlay").style.display = "none";
+  document.getElementById("intro").style.display = "none";
   gameStarted = true;
   audio.play();
   loop();
