@@ -33,8 +33,11 @@ function flashGlitch() {
   glitchOverlay.style.display = "flex";
   glitchOverlay.style.animation = "glitchFlash 1s ease-in-out forwards";
   setTimeout(() => {
-    window.location.href = "index.html";
-  }, 1000);
+    document.body.classList.add("fade-out");
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 1000);
+  }, 800);
 }
 
 setTimeout(() => {
