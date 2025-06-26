@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BUCKET – Sith Art & Clothing</title>
+  <title>BUCKET</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icon.png" />
@@ -11,90 +11,52 @@
 </head>
 <body>
   <script>
-    // Redirect to intro if not passed
     if (!localStorage.getItem("bucketTemplePassed")) {
       window.location.href = "index.html";
     }
   </script>
 
-  <nav class="nav">
-    <a href="#art">Art</a>
-    <a href="#clothing">Clothing</a>
-    <a href="#reaper">Reaper</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <header class="hero">
-    <h1 class="logo glitch">BUCKET</h1>
-    <p class="tagline">Let the Dark Side Sell Your Art</p>
-    <div class="drop-timer">
-      <p>NEXT DROP IN:</p>
-      <div id="countdown">Loading...</div>
-    </div>
+  <header class="app-header">
+    <h1 class="app-logo">BUCKET</h1>
+    <nav class="app-nav">
+      <a href="#art">Art</a>
+      <a href="#clothing">Clothing</a>
+      <a href="#about">About</a>
+    </nav>
   </header>
 
-  <section class="section" id="art">
-    <h2>Art</h2>
-    <div class="gallery">
-      <img src="art1.jpg" alt="Art 1" loading="lazy" />
-      <img src="art2.jpg" alt="Art 2" loading="lazy" />
-      <img src="art3.jpg" alt="Art 3" loading="lazy" />
-    </div>
-  </section>
-
-  <section class="section" id="clothing">
-    <h2>Clothing Drops</h2>
-    <div class="products">
-      <div class="product">
-        <img src="shirt1.jpg" alt="Shirt 1" loading="lazy" />
-        <h3>Dark Thread Tee</h3>
-        <button onclick="buyNow('Dark Thread Tee')">BUY</button>
+  <main>
+    <section class="app-section" id="art">
+      <h2>Art</h2>
+      <div class="gallery">
+        <div class="art-card">🖤 Dark Side Collage</div>
+        <div class="art-card">🌑 Galactic Pain</div>
+        <div class="art-card">🔥 Sith Ritual</div>
       </div>
-      <div class="product">
-        <img src="hoodie.jpg" alt="Hoodie" loading="lazy" />
-        <h3>Shadow Hoodie</h3>
-        <button onclick="buyNow('Shadow Hoodie')">BUY</button>
+    </section>
+
+    <section class="app-section" id="clothing">
+      <h2>Clothing</h2>
+      <div class="products">
+        <div class="product">
+          <h3>Shadow Tee</h3>
+          <button>Buy</button>
+        </div>
+        <div class="product">
+          <h3>Crimson Hoodie</h3>
+          <button>Buy</button>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section reaper" id="reaper">
-    <h2>The Reaper</h2>
-    <img src="reaper.png" alt="Grim Reaper" loading="lazy" />
-    <p>The eternal watcher of the Force. Every stitch, a prophecy. Every stroke, a death mark.</p>
-  </section>
+    <section class="app-section" id="about">
+      <h2>About</h2>
+      <p>BUCKET is a Sith-born design label. Glitch aesthetics. Deadly fashion. Powered by the dark side of the Force. Built for the underground, made for the future.</p>
+    </section>
+  </main>
 
-  <section class="section about" id="about">
-    <h2>About BUCKET</h2>
-    <p>Forged in the fires of the Outer Rim. Born from chaos, dressed in shadow. BUCKET is more than art. It is the darkness made visible.</p>
-  </section>
-
-  <section class="section contact" id="contact">
-    <h2>Contact</h2>
-    <p>Reach out through the shadows: <a href="mailto:bucket@darkmail.com">bucket@darkmail.com</a></p>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 BUCKET — <em>Let the Dark Side Sell Your Art.</em></p>
+  <footer class="footer">
+    <p>&copy; 2025 BUCKET. Built with shadow and style.</p>
   </footer>
-
-  <audio id="bgAudio" src="sith8bit.mp3" loop autoplay></audio>
-  <button id="toggleMusic">Toggle Music</button>
-
-  <script>
-    document.getElementById("toggleMusic").addEventListener("click", () => {
-      const audio = document.getElementById("bgAudio");
-      if (audio.paused) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
-    });
-
-    function buyNow(item) {
-      alert("You want to buy: " + item + ". Integration coming soon.");
-    }
-  </script>
 </body>
 </html>
