@@ -1,80 +1,100 @@
-body, html {
+body {
   margin: 0;
-  padding: 0;
-  background: black;
-  overflow: hidden;
   font-family: 'Orbitron', sans-serif;
+  background-color: #000;
+  color: #fff;
 }
 
-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
+a {
+  text-decoration: none;
   color: #e00000;
+  font-weight: bold;
+}
+
+.app-header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.8);
-  animation: fadein 2s ease;
+  background: #111;
+  padding: 16px 24px;
+  border-bottom: 2px solid #e00000;
 }
 
-.glitch {
-  font-size: 3rem;
-  letter-spacing: 8px;
-  text-shadow: 0 0 10px red;
-  animation: glitch 1.3s infinite;
-  margin-bottom: 10px;
+.app-logo {
+  font-size: 1.8rem;
+  color: #e00000;
+  letter-spacing: 4px;
 }
 
-.intro-sub {
-  margin-top: -10px;
-  margin-bottom: 30px;
-  font-size: 1.1rem;
-  opacity: 0.85;
-  animation: pulse 2s infinite;
+.app-nav a {
+  margin-left: 20px;
+  font-size: 1rem;
+}
+
+main {
+  padding: 32px 24px;
+}
+
+.app-section {
+  margin-bottom: 64px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  border-bottom: 1px solid #e00000;
+  padding-bottom: 8px;
+  margin-bottom: 24px;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.art-card {
+  background: #111;
+  border: 2px solid #e00000;
+  padding: 24px;
+  border-radius: 8px;
+  width: 160px;
+  text-align: center;
+}
+
+.products {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.product {
+  background: #111;
+  border: 2px solid #e00000;
+  padding: 20px;
+  border-radius: 8px;
+  width: 160px;
+  text-align: center;
 }
 
 button {
-  margin: 10px;
-  padding: 12px 24px;
-  background: transparent;
-  color: #e00000;
-  border: 2px solid #e00000;
-  font-size: 1rem;
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: #e00000;
+  border: none;
+  color: #000;
+  font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
+  border-radius: 4px;
 }
 
 button:hover {
-  background: #e00000;
-  color: black;
+  background: #ff0000;
 }
 
-@keyframes glitch {
-  0% { text-shadow: 2px 0 red; }
-  20% { text-shadow: -2px 0 red; }
-  40% { text-shadow: 2px 2px red; }
-  60% { text-shadow: -2px -2px red; }
-  100% { text-shadow: 0 0 10px red; }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.9; }
-  50% { opacity: 0.4; }
-}
-
-@keyframes fadein {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.footer {
+  padding: 24px;
+  background: #111;
+  text-align: center;
+  border-top: 1px solid #333;
+  color: #888;
 }
