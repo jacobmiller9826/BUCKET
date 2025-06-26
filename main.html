@@ -11,16 +11,11 @@
 </head>
 <body>
   <script>
+    // Redirect to intro if not passed
     if (!localStorage.getItem("bucketTemplePassed")) {
       window.location.href = "index.html";
     }
   </script>
-
-  <div id="cursor"></div>
-
-  <!-- Optional background music toggle -->
-  <audio id="bgAudio" src="sith8bit.mp3" loop autoplay></audio>
-  <button id="toggleMusic">Toggle Music</button>
 
   <nav class="nav">
     <a href="#art">Art</a>
@@ -84,6 +79,9 @@
     <p>&copy; 2025 BUCKET — <em>Let the Dark Side Sell Your Art.</em></p>
   </footer>
 
+  <audio id="bgAudio" src="sith8bit.mp3" loop autoplay></audio>
+  <button id="toggleMusic">Toggle Music</button>
+
   <script>
     document.getElementById("toggleMusic").addEventListener("click", () => {
       const audio = document.getElementById("bgAudio");
@@ -93,6 +91,10 @@
         audio.pause();
       }
     });
+
+    function buyNow(item) {
+      alert("You want to buy: " + item + ". Integration coming soon.");
+    }
   </script>
 </body>
 </html>
