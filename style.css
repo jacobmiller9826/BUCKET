@@ -20,14 +20,50 @@ body {
   text-shadow: 0 0 20px red;
 }
 
+.glitch {
+  animation: glitch 1.3s infinite;
+}
+
 .tagline {
-  margin-top: 10px;
   font-size: 1.2rem;
-  opacity: 0.8;
+  opacity: 0.9;
+  margin-top: 10px;
+}
+
+.drop-timer {
+  margin-top: 30px;
+  font-size: 1.1rem;
+}
+
+#countdown {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.nav a {
+  color: #e00000;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1rem;
+}
+
+.nav a:hover {
+  text-shadow: 0 0 5px red;
 }
 
 .section {
-  padding: 60px 20px;
+  padding: 80px 20px 60px;
   text-align: center;
 }
 
@@ -81,7 +117,7 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Custom cursor */
+/* Cursor */
 #cursor {
   position: fixed;
   width: 10px;
@@ -92,4 +128,13 @@ footer {
   z-index: 9999;
   box-shadow: 0 0 10px red;
   transform: translate(-50%, -50%);
+}
+
+/* Glitch Keyframes */
+@keyframes glitch {
+  0% { text-shadow: 2px 0 red; }
+  20% { text-shadow: -2px 0 red; }
+  40% { text-shadow: 2px 2px red; }
+  60% { text-shadow: -2px -2px red; }
+  100% { text-shadow: 0 0 10px red; }
 }
