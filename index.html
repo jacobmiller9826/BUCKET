@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BUCKET – Enter the Temple</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BUCKET – Game Intro</title>
+  <link rel="stylesheet" href="style.css">
   <script defer src="game.js"></script>
 </head>
 <body>
-  <canvas id="templeCanvas"></canvas>
-
-  <div class="overlay" id="intro">
-    <h1 class="glitch">BUCKET</h1>
-    <p class="intro-sub">“The temple awakens...”</p>
-    <button id="startBtn">ENTER THE TEMPLE</button>
-    <button id="skipBtn">SKIP</button>
+  <div class="game-intro">
+    <h1>Awaken in the Temple</h1>
+    <p>Darkness guides you. Survive the light...</p>
+    <button onclick="startGame()">Begin Trial</button>
   </div>
-
-  <audio id="sithAudio" src="sith8bit.mp3" loop></audio>
 </body>
 </html>
