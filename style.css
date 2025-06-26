@@ -1,100 +1,91 @@
 body {
   margin: 0;
+  padding: 0;
+  background: black;
+  color: #e00000;
   font-family: 'Orbitron', sans-serif;
-  background-color: #000;
-  color: #fff;
-}
-
-a {
-  text-decoration: none;
-  color: #e00000;
-  font-weight: bold;
-}
-
-.app-header {
+  overflow: hidden;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: #111;
-  padding: 16px 24px;
-  border-bottom: 2px solid #e00000;
+  justify-content: center;
+  height: 100vh;
 }
 
-.app-logo {
-  font-size: 1.8rem;
-  color: #e00000;
-  letter-spacing: 4px;
-}
-
-.app-nav a {
-  margin-left: 20px;
-  font-size: 1rem;
-}
-
-main {
-  padding: 32px 24px;
-}
-
-.app-section {
-  margin-bottom: 64px;
-}
-
-h2 {
-  font-size: 1.5rem;
-  border-bottom: 1px solid #e00000;
-  padding-bottom: 8px;
-  margin-bottom: 24px;
-}
-
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.art-card {
-  background: #111;
-  border: 2px solid #e00000;
-  padding: 24px;
-  border-radius: 8px;
-  width: 160px;
+.ritual-loader {
   text-align: center;
+  animation: flicker 2s infinite;
 }
 
-.products {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
+.sith-symbol {
+  font-size: 6rem;
+  animation: pulse-glow 1.5s infinite alternate;
+  text-shadow: 0 0 10px red, 0 0 20px red, 0 0 40px crimson;
 }
 
-.product {
-  background: #111;
-  border: 2px solid #e00000;
-  padding: 20px;
-  border-radius: 8px;
-  width: 160px;
-  text-align: center;
-}
-
-button {
+.ritual-chant {
+  font-size: 1.2rem;
   margin-top: 12px;
-  padding: 10px 20px;
-  background: #e00000;
-  border: none;
-  color: #000;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 4px;
+  animation: fadein 3s ease-in-out infinite alternate;
 }
 
-button:hover {
-  background: #ff0000;
+.grim-reapers {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
 }
 
-.footer {
-  padding: 24px;
-  background: #111;
-  text-align: center;
-  border-top: 1px solid #333;
-  color: #888;
+.grim {
+  font-size: 3rem;
+  animation: floaty 4s ease-in-out infinite;
+}
+
+.grim:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.grim:nth-child(3) {
+  animation-delay: 2s;
+}
+
+@keyframes pulse-glow {
+  0% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes fadein {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+@keyframes floaty {
+  0% { transform: translateY(0px); opacity: 0.9; }
+  50% { transform: translateY(-20px); opacity: 1; }
+  100% { transform: translateY(0px); opacity: 0.9; }
+}
+
+.glitch-end {
+  animation: glitchText 0.8s infinite;
+  text-shadow: 0 0 10px red, 2px 2px crimson;
+}
+
+@keyframes glitchFlash {
+  0% { opacity: 0; background: black; }
+  25% { opacity: 1; background: #300; }
+  50% { background: #000; }
+  75% { background: #600; }
+  100% { opacity: 1; background: black; }
+}
+
+@keyframes glitchText {
+  0%, 100% { transform: scale(1) translateX(0); }
+  20% { transform: scale(1.02) translateX(-2px); }
+  40% { transform: scale(1) translateX(2px); }
+  60% { transform: scale(1.03) translateX(-1px); }
+  80% { transform: scale(0.98) translateX(1px); }
 }
