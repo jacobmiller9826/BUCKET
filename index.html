@@ -10,7 +10,17 @@
   <script defer src="script.js"></script>
 </head>
 <body>
+  <script>
+    if (!localStorage.getItem("bucketTemplePassed")) {
+      window.location.href = "index.html";
+    }
+  </script>
+
   <div id="cursor"></div>
+
+  <!-- Optional background music toggle -->
+  <audio id="bgAudio" src="sith8bit.mp3" loop autoplay></audio>
+  <button id="toggleMusic">Toggle Music</button>
 
   <nav class="nav">
     <a href="#art">Art</a>
@@ -73,5 +83,16 @@
   <footer>
     <p>&copy; 2025 BUCKET — <em>Let the Dark Side Sell Your Art.</em></p>
   </footer>
+
+  <script>
+    document.getElementById("toggleMusic").addEventListener("click", () => {
+      const audio = document.getElementById("bgAudio");
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    });
+  </script>
 </body>
 </html>
