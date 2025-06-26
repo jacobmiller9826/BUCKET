@@ -9,7 +9,7 @@
 </head>
 <body>
   <nav class="store-nav">
-    <h1>BUCKET</h1>
+    <h1 class="glitch">BUCKET</h1>
     <div>
       <a href="#art">Art</a>
       <a href="#clothing">Clothing</a>
@@ -18,16 +18,18 @@
   </nav>
 
   <main>
+    <div class="ritual-timer">🕒 Next Drop in: <span id="countdown">Loading...</span></div>
+
     <section id="art">
       <h2>Art</h2>
       <div class="product-grid">
-        <div class="product-card">
+        <div class="product-card glitch-hover">
           <div class="product-img sith-art-1"></div>
           <h3>“Desert Sith #1”</h3>
           <p class="price">$40</p>
           <button onclick="purchase('bucketToken_art1', 'https://buy.stripe.com/test_sith_art')">Buy</button>
         </div>
-        <div class="product-card">
+        <div class="product-card glitch-hover">
           <div class="product-img sith-art-2"></div>
           <h3>“Temple Glitch”</h3>
           <p class="price">$60</p>
@@ -39,13 +41,13 @@
     <section id="clothing">
       <h2>Clothing</h2>
       <div class="product-grid">
-        <div class="product-card">
+        <div class="product-card glitch-hover">
           <div class="product-img sith-shirt"></div>
           <h3>“Dark Desert Tee”</h3>
           <p class="price">$30</p>
           <button onclick="purchase('bucketToken_cloth1', 'https://buy.stripe.com/test_dark_tee')">Buy</button>
         </div>
-        <div class="product-card">
+        <div class="product-card glitch-hover">
           <div class="product-img red-hood"></div>
           <h3>“Crimson Hood”</h3>
           <p class="price">$50</p>
@@ -55,7 +57,7 @@
     </section>
 
     <section id="unlocked" style="display:none;">
-      <h2>🔓 Unlocked</h2>
+      <h2>🔓 Unlocked Lore</h2>
       <div id="unlockedItems"></div>
     </section>
 
@@ -77,16 +79,35 @@
 
   <script>
     const unlocks = {
-      bucketToken_art1: "🖼 Hidden Art: <a href='#'>Desert Sith Canvas</a>",
-      bucketToken_art2: "💀 Glitch Scroll: Temple Corruption Logs",
-      bucketToken_cloth1: "🎧 Chant Loop: Dark Desert Mix",
-      bucketToken_cloth2: "📖 Crimson Code Archive"
+      bucketToken_art1: "🖼 <b>Desert Sith #1:</b> ‘The sands whisper of a power not yet reborn...’",
+      bucketToken_art2: "💀 <b>Temple Glitch:</b> ‘They shattered the code to bind the Force with pixels.’",
+      bucketToken_cloth1: "🎧 <b>Dark Desert Tee:</b> ‘Those who wear the heat cannot fear the flame.’",
+      bucketToken_cloth2: "📖 <b>Crimson Hood:</b> ‘The hood is not worn. It chooses.’"
     };
+
+    let glitchSoundPlayed = false;
+
+    function playGlitchSound() {
+      if (!glitchSoundPlayed) {
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'square';
+        osc.frequency.value = 240;
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.3);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.3);
+        glitchSoundPlayed = true;
+      }
+    }
 
     function purchase(token, url) {
       localStorage.setItem(token, "true");
       showUnlocked();
       openModal(url);
+      playGlitchSound();
     }
 
     function showUnlocked() {
@@ -102,6 +123,11 @@
         }
       }
       if (hasUnlock) document.getElementById("unlocked").style.display = "block";
+
+      // If all unlocked, invert theme for "Dark Mode is a Lie"
+      if (Object.keys(unlocks).every(token => localStorage.getItem(token))) {
+        document.body.classList.add("inverted");
+      }
     }
 
     function openModal(link) {
@@ -118,8 +144,27 @@
       document.getElementById("modal").classList.add("hidden");
     }
 
+    function startTimer() {
+      const countdown = document.getElementById("countdown");
+      const target = new Date();
+      target.setHours(target.getHours() + 6); // 6 hours countdown
+      setInterval(() => {
+        const now = new Date();
+        const diff = target - now;
+        if(diff <= 0) {
+          countdown.textContent = "The Dark Awaits...";
+          return;
+        }
+        const hours = Math.floor(diff / 1000 / 60 / 60);
+        const mins = Math.floor(diff / 1000 / 60) % 60;
+        const secs = Math.floor(diff / 1000) % 60;
+        countdown.textContent = `${hours}h ${mins}m ${secs}s`;
+      }, 1000);
+    }
+
     window.onload = () => {
       showUnlocked();
+      startTimer();
       let deferredPrompt;
       const installBtn = document.getElementById('installBtn');
       window.addEventListener('beforeinstallprompt', (e) => {
