@@ -1,3 +1,4 @@
+/* GLOBAL BASE */
 body {
   margin: 0;
   padding: 0;
@@ -6,6 +7,12 @@ body {
   font-family: 'Orbitron', sans-serif;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* NAVIGATION */
 .store-nav {
   background-color: #120000;
   padding: 1rem 2rem;
@@ -20,6 +27,12 @@ body {
   text-decoration: none;
 }
 
+.store-nav a {
+  margin-left: 1rem;
+  font-weight: bold;
+}
+
+/* GLITCH EFFECT */
 .glitch {
   animation: glitchAnim 1s infinite;
   text-shadow: 0 0 5px red;
@@ -31,10 +44,12 @@ body {
   100% { text-shadow: 2px -2px red, -2px 2px blue; }
 }
 
+/* PRODUCT GRID */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 2rem;
+  padding: 2rem;
 }
 
 .product-card {
@@ -46,11 +61,18 @@ body {
   border-radius: 8px;
 }
 
+.product-img {
+  height: 150px;
+  background: linear-gradient(45deg, #220000, #440000);
+  margin-bottom: 1rem;
+}
+
 .price {
   font-size: 1.1rem;
   color: #ff4444;
 }
 
+/* BUTTONS */
 button {
   background: #330000;
   border: 2px solid #e00000;
@@ -58,11 +80,21 @@ button {
   padding: 0.6rem 1.4rem;
   font-family: 'Orbitron', sans-serif;
   transition: background 0.3s ease;
+  cursor: pointer;
+  border-radius: 6px;
 }
 
 button:hover {
   background: #e00000;
   color: black;
+}
+
+/* COUNTDOWN / DROPS */
+.ritual-timer {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: crimson;
 }
 
 /* CODEX PAGE */
@@ -92,10 +124,54 @@ button:hover {
   border: 1px solid crimson;
   background: #1a0000;
   box-shadow: 0 0 10px red;
+  border-radius: 8px;
 }
 
-.sith-chant {
-  font-style: italic;
+/* DAILY MESSAGE */
+.daily-message {
   color: #ff4444;
-  margin-top: 1rem;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* RANK SYSTEM */
+.rank-badge {
+  font-size: 1.1rem;
+  background: #1a0000;
+  padding: 0.5rem 1rem;
+  border: 1px solid crimson;
+  box-shadow: 0 0 10px red;
+  margin-bottom: 1rem;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+/* UNLOCK ENTRY ANIMATION */
+.entry-unlocked {
+  padding: 0.8rem;
+  background: #2c0000;
+  border: 1px solid #900;
+  margin-bottom: 1rem;
+  animation: glowUnlock 0.6s ease-in-out;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+@keyframes glowUnlock {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+    box-shadow: 0 0 0px red;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 10px crimson;
+  }
 }
