@@ -178,4 +178,28 @@ main {
 
 .close:hover {
   color: #ff4444;
+#sigilCanvas {
+  display: block;
+  margin: 2rem auto;
+  background-color: black;
+  border: 2px solid #ff2200;
+}
+
+#generateBtn {
+  display: block;
+  margin: 1rem auto;
+  padding: 12px 24px;
+  border: 2px solid #ff2200;
+  background: transparent;
+  color: #ff2200;
+  font-family: monospace;
+  cursor: pointer;
+  border-radius: 4px;
+  animation: buyPulse 2s infinite ease-in-out;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+#generateBtn:hover {
+  background: #ff2200;
+  color: black;
 }
