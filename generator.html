@@ -19,26 +19,84 @@
 
   <header>
     <h1>GENERATIVE RITUALS</h1>
-    <p>
-      Create your own BUCKET sigils and glyphs. <em>Coming soon...</em>
-    </p>
+    <p>Click below to forge your own BUCKET sigil in the shadow.</p>
   </header>
 
   <main>
-    <section>
-      <p>
-        In time, the secrets of the Generator will be revealed.
-        Each visitor will craft their own ritual art to unlock new power.
-      </p>
-    </section>
+    <canvas id="sigilCanvas"></canvas>
+    <button id="generateBtn">Generate New Sigil</button>
   </main>
 
   <script>
     function toggleRitualAudio() {
-      if (window.toggleRitualAudio) {
-        window.toggleRitualAudio();
-      } else {
-        alert("Ritual audio not available.");
+      alert("Ritual audio not available on this page.");
+    }
+
+    // GENERATOR CODE
+    const canvas = document.getElementById('sigilCanvas');
+    const ctx = canvas.getContext('2d');
+    resizeCanvas();
+
+    window.addEventListener('resize', resizeCanvas);
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight * 0.7;
+      drawSigil();
+    }
+
+    document.getElementById('generateBtn').addEventListener('click', drawSigil);
+
+    function drawSigil() {
+      ctx.fillStyle = 'black';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+
+      ctx.strokeStyle = `rgba(255, 34, 0, 0.8)`;
+      ctx.lineWidth = 3;
+
+      // Draw central circle
+      ctx.beginPath();
+      ctx.arc(cx, cy, 50 + Math.random() * 50, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Add random symmetrical lines
+      for (let i = 0; i < 8; i++) {
+        ctx.beginPath();
+        let angle = (Math.PI * 2 / 8) * i;
+        let len = 80 + Math.random() * 100;
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(angle) * len, cy + Math.sin(angle) * len);
+        ctx.stroke();
+      }
+
+      // Add runic sigils (rectangles/crosses)
+      for (let i = 0; i < 5; i++) {
+        let x = cx + (Math.random() - 0.5) * 200;
+        let y = cy + (Math.random() - 0.5) * 200;
+        ctx.fillStyle = 'rgba(255,0,0,0.5)';
+        ctx.fillRect(x, y, 10, 10);
+
+        ctx.beginPath();
+        ctx.moveTo(x - 10, y);
+        ctx.lineTo(x + 20, y);
+        ctx.moveTo(x, y - 10);
+        ctx.lineTo(x, y + 20);
+        ctx.stroke();
+      }
+
+      // Glowing effect overlay
+      ctx.fillStyle = 'rgba(255,0,0,0.05)';
+      for (let i = 0; i < 30; i++) {
+        let radius = Math.random() * 300;
+        let angle = Math.random() * Math.PI * 2;
+        let x = cx + Math.cos(angle) * radius;
+        let y = cy + Math.sin(angle) * radius;
+        ctx.beginPath();
+        ctx.arc(x, y, 15, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
   </script>
