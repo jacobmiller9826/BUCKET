@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BUCKET CODEX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BUCKET – Codex</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -13,39 +13,45 @@
     <a href="main.html">Clothing</a>
     <a href="about.html">About</a>
     <a href="codex.html">Codex</a>
+    <a href="generator.html">Generator</a>
+    <button id="audioToggle" onclick="toggleRitualAudio()">🎧 Toggle Ritual Audio</button>
   </nav>
 
-  <h2 style="text-align:center; margin-top:2rem;">☠️ BUCKET CODEX ☠️</h2>
-  <p class="codex-intro">Unlock the ancient ranks of the Sith. Each level reveals a prophecy.</p>
+  <main>
+    <section>
+      <h2>The BUCKET CODEX</h2>
+      <p>
+        Explore the ancient Sith-inspired lore behind BUCKET.
+      </p>
+      <div class="codex-entry">
+        <h3>Chapter I: The Shadow Beckons</h3>
+        <p>
+          In the void between stars lies knowledge older than time. Only those who surrender to the Dark will see it.
+        </p>
+      </div>
+      <div class="codex-entry">
+        <h3>Chapter II: Ritual of the Mark</h3>
+        <p>
+          Every BUCKET item is marked with a sigil—an invitation to power. Wear it, and claim your legacy.
+        </p>
+      </div>
+      <div class="codex-entry">
+        <h3>Chapter III: The Eternal Cycle</h3>
+        <p>
+          Creation. Destruction. Rebirth. BUCKET embodies the cycle in every design, echoing the ancient Code of the Sith.
+        </p>
+      </div>
+    </section>
+  </main>
 
-  <div class="codex-grid">
-    <div class="codex-rank" data-rank="acolyte">
-      <h3>Acolyte</h3>
-      <button onclick="showProphecy('acolyte')">Reveal</button>
-      <p class="prophecy" id="acolyte-prophecy"></p>
-    </div>
-    <div class="codex-rank" data-rank="knight">
-      <h3>Knight</h3>
-      <button onclick="showProphecy('knight')">Reveal</button>
-      <p class="prophecy" id="knight-prophecy"></p>
-    </div>
-    <div class="codex-rank" data-rank="lord">
-      <h3>Lord</h3>
-      <button onclick="showProphecy('lord')">Reveal</button>
-      <p class="prophecy" id="lord-prophecy"></p>
-    </div>
-    <div class="codex-rank" data-rank="master">
-      <h3>Master</h3>
-      <button onclick="showProphecy('master')">Reveal</button>
-      <p class="prophecy" id="master-prophecy"></p>
-    </div>
-  </div>
-
-  <div class="nft-check">
-    <button onclick="checkForNFT()">🔓 Check for NFT Unlock</button>
-    <p id="nftResult"></p>
-  </div>
-
-  <script src="codex.js"></script>
+  <script>
+    function toggleRitualAudio() {
+      if (window.toggleRitualAudio) {
+        window.toggleRitualAudio();
+      } else {
+        alert("Ritual audio not available.");
+      }
+    }
+  </script>
 </body>
 </html>
