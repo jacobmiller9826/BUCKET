@@ -1,87 +1,78 @@
-/* GLOBAL BASE */
 body {
   margin: 0;
-  padding: 0;
-  background: black;
-  color: #e00000;
+  background-color: black;
+  color: crimson;
   font-family: 'Orbitron', sans-serif;
 }
 
 a {
-  color: inherit;
+  color: crimson;
   text-decoration: none;
 }
 
-/* NAVIGATION */
 .store-nav {
-  background-color: #120000;
-  padding: 1rem 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  box-shadow: 0 0 20px #e00000aa;
-}
-
-.store-nav h1 a {
-  color: #e00000;
-  text-decoration: none;
+  padding: 1rem;
+  background-color: #120000;
+  border-bottom: 2px solid #900;
 }
 
 .store-nav a {
-  margin-left: 1rem;
+  color: crimson;
   font-weight: bold;
+  letter-spacing: 2px;
 }
 
-/* GLITCH EFFECT */
-.glitch {
-  animation: glitchAnim 1s infinite;
-  text-shadow: 0 0 5px red;
+.store-nav h1 a {
+  font-size: 1.5rem;
 }
 
-@keyframes glitchAnim {
-  0% { text-shadow: 2px 2px red, -2px -2px blue; }
-  50% { text-shadow: -1px 2px red, 2px -1px blue; }
-  100% { text-shadow: 2px -2px red, -2px 2px blue; }
-}
-
-/* PRODUCT GRID */
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 2rem;
 }
 
 .product-card {
-  border: 2px solid crimson;
+  background: #1a0000;
+  border: 2px solid #900;
+  color: crimson;
   padding: 1rem;
-  background: #110000;
+  margin: 1rem;
+  width: 250px;
   text-align: center;
-  box-shadow: 0 0 20px #e0000055;
-  border-radius: 8px;
+  box-shadow: 0 0 10px red;
+  transition: transform 0.2s;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px red;
 }
 
 .product-img {
-  height: 150px;
-  background: linear-gradient(45deg, #220000, #440000);
+  height: 200px;
+  background: linear-gradient(45deg, #300, #600);
   margin-bottom: 1rem;
 }
 
 .price {
-  font-size: 1.1rem;
-  color: #ff4444;
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
 }
 
-/* BUTTONS */
 button {
   background: #330000;
   border: 2px solid #e00000;
   color: #ff5555;
   padding: 0.6rem 1.4rem;
-  font-family: 'Orbitron', sans-serif;
-  transition: background 0.3s ease;
   cursor: pointer;
   border-radius: 6px;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
 }
 
 button:hover {
@@ -89,89 +80,51 @@ button:hover {
   color: black;
 }
 
-/* COUNTDOWN / DROPS */
-.ritual-timer {
-  text-align: center;
-  margin-top: 1rem;
-  font-size: 1.2rem;
+/* Ritual Modal */
+.ritual-modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.95);
   color: crimson;
+  text-align: center;
+  padding-top: 10%;
+  font-family: 'Orbitron', sans-serif;
 }
 
-/* CODEX PAGE */
-.codex-body {
+.ritual-content {
+  background: #1a0000;
+  border: 2px solid #900;
+  padding: 2rem;
+  margin: auto;
+  width: 80%;
+  max-width: 400px;
+  box-shadow: 0 0 20px red;
+  animation: glowUnlock 0.6s ease-in-out;
+}
+
+.ritual-content input {
   background: black;
   color: crimson;
-  overflow: hidden;
-}
-
-.codex-overlay {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  padding: 2rem;
-  background: rgba(0,0,0,0.85);
-  z-index: 2;
-  overflow-y: auto;
-  text-align: center;
-}
-
-.codex-scroll {
-  max-height: 60vh;
-  overflow-y: auto;
-  margin: 2rem auto;
-  padding: 1rem;
-  border: 1px solid crimson;
-  background: #1a0000;
-  box-shadow: 0 0 10px red;
-  border-radius: 8px;
-}
-
-/* DAILY MESSAGE */
-.daily-message {
-  color: #ff4444;
-  font-size: 1.2rem;
-  margin: 1rem 0;
-  animation: pulse 3s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-
-/* RANK SYSTEM */
-.rank-badge {
-  font-size: 1.1rem;
-  background: #1a0000;
-  padding: 0.5rem 1rem;
-  border: 1px solid crimson;
-  box-shadow: 0 0 10px red;
-  margin-bottom: 1rem;
-  display: inline-block;
-  border-radius: 5px;
-}
-
-/* UNLOCK ENTRY ANIMATION */
-.entry-unlocked {
-  padding: 0.8rem;
-  background: #2c0000;
   border: 1px solid #900;
-  margin-bottom: 1rem;
-  animation: glowUnlock 0.6s ease-in-out;
-  font-size: 1rem;
-  border-radius: 4px;
+  padding: 0.5rem;
+  width: 80%;
+  margin: 1rem auto;
 }
 
-@keyframes glowUnlock {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-    box-shadow: 0 0 0px red;
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-    box-shadow: 0 0 10px crimson;
-  }
+.ritual-content button {
+  margin-top: 1rem;
+  background: #330000;
+  border: 2px solid #e00000;
+  color: #ff5555;
+  padding: 0.6rem 1.4rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.ritual-content button:hover {
+  background: #e00000;
+  color: black;
 }
