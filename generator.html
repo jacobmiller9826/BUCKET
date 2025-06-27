@@ -14,32 +14,28 @@
     <a href="about.html">About</a>
     <a href="codex.html">Codex</a>
     <a href="generator.html">Generator</a>
-    <button id="audioToggle" onclick="toggleRitualAudio()">🎧 Toggle Ritual Audio</button>
   </nav>
 
   <header>
     <h1>GENERATIVE RITUALS</h1>
-    <p>Click below to forge your own BUCKET sigil in the shadow.</p>
+    <p>Forge your own BUCKET sigil and claim it forever.</p>
   </header>
 
   <main>
     <canvas id="sigilCanvas"></canvas>
     <button id="generateBtn">Generate New Sigil</button>
     <button id="saveBtn">Save Sigil</button>
+    <button id="mintBtn">Mint as NFT</button>
+    <p id="walletStatus"></p>
   </main>
 
   <script>
-    function toggleRitualAudio() {
-      alert("Ritual audio not available on this page.");
-    }
-
-    // GENERATOR CODE
+    // Basic canvas generator
     const canvas = document.getElementById('sigilCanvas');
     const ctx = canvas.getContext('2d');
     resizeCanvas();
 
     window.addEventListener('resize', resizeCanvas);
-
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight * 0.7;
@@ -58,13 +54,10 @@
 
       ctx.strokeStyle = `rgba(255, 34, 0, 0.8)`;
       ctx.lineWidth = 3;
-
-      // Draw central circle
       ctx.beginPath();
       ctx.arc(cx, cy, 50 + Math.random() * 50, 0, Math.PI * 2);
       ctx.stroke();
 
-      // Add random symmetrical lines
       for (let i = 0; i < 8; i++) {
         ctx.beginPath();
         let angle = (Math.PI * 2 / 8) * i;
@@ -74,7 +67,6 @@
         ctx.stroke();
       }
 
-      // Add runic sigils (rectangles/crosses)
       for (let i = 0; i < 5; i++) {
         let x = cx + (Math.random() - 0.5) * 200;
         let y = cy + (Math.random() - 0.5) * 200;
@@ -89,7 +81,6 @@
         ctx.stroke();
       }
 
-      // Glowing effect overlay
       ctx.fillStyle = 'rgba(255,0,0,0.05)';
       for (let i = 0; i < 30; i++) {
         let radius = Math.random() * 300;
@@ -107,6 +98,39 @@
       link.download = 'bucket_sigil.png';
       link.href = canvas.toDataURL();
       link.click();
+    }
+
+    // Web3 / NFT mint logic
+    let userAddress = null;
+
+    document.getElementById('mintBtn').addEventListener('click', async () => {
+      if (!window.ethereum) {
+        alert('MetaMask required to mint!');
+        return;
+      }
+
+      if (!userAddress) {
+        await connectWallet();
+      }
+
+      const imageData = canvas.toDataURL("image/png");
+      alert("Pretend uploading to IPFS and minting on-chain!");
+
+      // Example: Upload to Pinata or NFTPort here
+      // Example: Call your contract's mint function here
+
+      document.getElementById('walletStatus').textContent = `Mint request sent from ${userAddress}`;
+    });
+
+    async function connectWallet() {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        userAddress = accounts[0];
+        document.getElementById('walletStatus').textContent = `Connected: ${userAddress}`;
+      } catch (err) {
+        console.error(err);
+        alert('Wallet connection failed.');
+      }
     }
   </script>
 </body>
