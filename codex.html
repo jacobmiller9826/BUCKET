@@ -2,20 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BUCKET CODEX</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="codex-body">
-  <div class="codex-overlay">
-    <h1 class="glitch">☠️ THE CODEX ☠️</h1>
-    <p class="daily-message" id="dailyMessage"></p>
-    <div id="rankDisplay" class="rank-badge"></div>
-    <div id="codexEntries" class="codex-scroll"></div>
-    <button onclick="ritualComplete()">Complete Ritual</button>
+<body>
+  <nav class="store-nav">
+    <h1><a href="index.html">BUCKET</a></h1>
+    <a href="main.html">Art</a>
+    <a href="main.html">Clothing</a>
+    <a href="about.html">About</a>
+    <a href="codex.html">Codex</a>
+  </nav>
+
+  <h2 style="text-align:center; margin-top:2rem;">☠️ BUCKET CODEX ☠️</h2>
+  <p class="codex-intro">Unlock the ancient ranks of the Sith. Each level reveals a prophecy.</p>
+
+  <div class="codex-grid">
+    <div class="codex-rank" data-rank="acolyte">
+      <h3>Acolyte</h3>
+      <button onclick="showProphecy('acolyte')">Reveal</button>
+      <p class="prophecy" id="acolyte-prophecy"></p>
+    </div>
+    <div class="codex-rank" data-rank="knight">
+      <h3>Knight</h3>
+      <button onclick="showProphecy('knight')">Reveal</button>
+      <p class="prophecy" id="knight-prophecy"></p>
+    </div>
+    <div class="codex-rank" data-rank="lord">
+      <h3>Lord</h3>
+      <button onclick="showProphecy('lord')">Reveal</button>
+      <p class="prophecy" id="lord-prophecy"></p>
+    </div>
+    <div class="codex-rank" data-rank="master">
+      <h3>Master</h3>
+      <button onclick="showProphecy('master')">Reveal</button>
+      <p class="prophecy" id="master-prophecy"></p>
+    </div>
   </div>
 
-  <canvas id="sithCanvas"></canvas>
   <script src="codex.js"></script>
 </body>
 </html>
