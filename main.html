@@ -1,91 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BUCKET – Art & Clothing</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Modal styling */
-    .modal {
-      display: none; 
-      position: fixed; 
-      z-index: 9999; 
-      left: 0;
-      top: 0;
-      width: 100%; 
-      height: 100%; 
-      overflow: auto; 
-      background-color: rgba(0,0,0,0.85); 
-      backdrop-filter: blur(6px);
-    }
-    .modal-content {
-      background-color: #110000;
-      margin: 10% auto; 
-      padding: 20px;
-      border: 2px solid #ff2200;
-      border-radius: 10px;
-      max-width: 400px;
-      box-shadow: 0 0 30px #ff2200;
-      color: #ff2200;
-      font-family: monospace;
-      text-align: center;
-    }
-    .close {
-      color: #ff2200;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-      user-select: none;
-    }
-    .close:hover {
-      color: #ff4444;
-    }
-    /* Chant input and buttons */
-    #chantInput {
-      width: 100%;
-      padding: 8px;
-      margin-top: 10px;
-      font-size: 1rem;
-      color: #ff2200;
-      background: #110000;
-      border: 1px solid #ff2200;
-      border-radius: 4px;
-    }
-    #chantSubmitBtn, #confirmPurchaseBtn {
-      margin-top: 10px;
-      padding: 10px 16px;
-      font-family: monospace;
-      border-radius: 4px;
-      cursor: pointer;
-      border: 1px solid #ff2200;
-      background: transparent;
-      color: #ff2200;
-      transition: background-color 0.3s ease;
-    }
-    #chantSubmitBtn:hover:not(:disabled),
-    #confirmPurchaseBtn:hover:not(:disabled) {
-      background: #ff2200;
-      color: black;
-    }
-    #confirmPurchaseBtn {
-      border: none;
-      background: #ff2200;
-      color: black;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-    #chantMessage {
-      color: #ff4444;
-      font-style: italic;
-      margin-top: 8px;
-      min-height: 24px;
-    }
-  </style>
 </head>
 <body>
-
   <nav class="store-nav">
     <h1><a href="index.html">BUCKET</a></h1>
     <a href="main.html">Art</a>
@@ -96,40 +17,43 @@
     <button id="audioToggle" onclick="toggleRitualAudio()">🎧 Toggle Ritual Audio</button>
   </nav>
 
+  <header>
+    <h1>ART & CLOTHING</h1>
+    <p>Unleash the Dark Side with each unique piece. Choose wisely.</p>
+  </header>
+
   <main>
-    <!-- Your art and clothing product listings with buy buttons -->
-    <section id="products" style="padding: 2rem;">
-      <h2>Art & Clothing</h2>
+    <section>
       <button class="buyBtn" data-product="Sith Robe">Buy Sith Robe</button>
       <button class="buyBtn" data-product="Bucket Painting">Buy Bucket Painting</button>
-      <!-- Add more products as needed -->
+      <button class="buyBtn" data-product="Ancient Sigil Shirt">Buy Ancient Sigil Shirt</button>
+      <button class="buyBtn" data-product="Dark Side Hoodie">Buy Dark Side Hoodie</button>
     </section>
   </main>
 
-  <!-- Buy Modal -->
+  <!-- Modal copied from index for consistency -->
   <div id="buyModal" class="modal">
     <div class="modal-content">
       <span class="close" id="buyModalClose">&times;</span>
       <h2>Ritual Purchase</h2>
       <p>Type the ancient chant to proceed:</p>
-
-      <input 
-        type="text" 
-        id="chantInput" 
-        placeholder="Enter ancient chant here" 
-        autocomplete="off" 
-      />
-      
+      <input type="text" id="chantInput" placeholder="Enter ancient chant here" autocomplete="off" />
       <button id="chantSubmitBtn" disabled>Invoke</button>
-
       <p id="chantMessage"></p>
-
       <button id="confirmPurchaseBtn" disabled>Confirm Purchase</button>
     </div>
   </div>
 
   <script>
-    // Modal open/close
+    function toggleRitualAudio() {
+      if (window.toggleRitualAudio) {
+        window.toggleRitualAudio();
+      } else {
+        alert("Ritual audio not available.");
+      }
+    }
+
+    // Modal functionality
     const buyModal = document.getElementById("buyModal");
     const buyModalClose = document.getElementById("buyModalClose");
     const buyButtons = document.querySelectorAll(".buyBtn");
@@ -156,9 +80,7 @@
       }
     };
 
-    // Chant validation and purchase flow
     const correctChant = "embrace the shadow within";
-
     const chantInput = document.getElementById("chantInput");
     const chantSubmitBtn = document.getElementById("chantSubmitBtn");
     const chantMessage = document.getElementById("chantMessage");
@@ -191,7 +113,6 @@
       alert("The ritual is complete. Your purchase is confirmed.");
       buyModal.style.display = "none";
       resetModal();
-      // TODO: Add your purchase completion logic here
     });
 
     function resetModal() {
@@ -200,16 +121,6 @@
       chantMessage.textContent = "";
       confirmPurchaseBtn.disabled = true;
     }
-
-    // Ritual Audio Toggle (if ritualaudio.js exists)
-    function toggleRitualAudio() {
-      if (window.toggleRitualAudio) {
-        window.toggleRitualAudio();
-      } else {
-        alert("Ritual audio not available.");
-      }
-    }
   </script>
-
 </body>
 </html>
