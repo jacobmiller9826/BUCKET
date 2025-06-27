@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BUCKET – Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="store-nav">
+    <h1><a href="index.html">BUCKET</a></h1>
+    <a href="main.html">Art</a>
+    <a href="main.html">Clothing</a>
+    <a href="about.html">About</a>
+    <a href="codex.html">Codex</a>
+    <a href="generator.html">Generator</a>
+  </nav>
+
+  <section class="generator">
+    <h2>☠️ Perform the Sith Ritual to Summon Art ☠️</h2>
+    <p>Enter your dark prompt:</p>
+    <input type="text" id="promptInput" placeholder="e.g. 'desert ruin'">
+    <button onclick="performRitual()">Perform Ritual</button>
+    <p id="ritualStatus"></p>
+    <canvas id="artCanvas" width="500" height="500"></canvas>
+    <button id="saveBtn" style="display:none;" onclick="saveImage()">Download Vision</button>
+  </section>
+
+  <script src="generator.js"></script>
+</body>
+</html>
