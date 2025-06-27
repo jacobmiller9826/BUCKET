@@ -151,4 +151,29 @@ button:hover {
 .ritual-content button:hover {
   background: #e00000;
   color: black;
+.nft-check {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.nft-check button {
+  background: #330000;
+  border: 2px solid #e00000;
+  color: #ff5555;
+  padding: 0.6rem 1.4rem;
+  cursor: pointer;
+  border-radius: 6px;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+}
+
+.nft-check button:hover {
+  background: #e00000;
+  color: black;
+}
+
+#nftResult {
+  margin-top: 1rem;
+  color: #ffaaaa;
+  font-size: 1rem;
 }
