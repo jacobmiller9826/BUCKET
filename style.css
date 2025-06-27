@@ -220,4 +220,69 @@ button:hover {
   margin-top: 1rem;
   border: 2px solid red;
   background-color: black;
+body {
+  background-color: black;
+  color: #ff2200;
+  font-family: monospace;
+  margin: 0;
+}
+
+.store-nav {
+  background: #110000;
+  padding: 1rem;
+  border-bottom: 2px solid #ff2200;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+}
+
+.store-nav a {
+  color: #ff2200;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.store-nav a:hover {
+  border-color: #ff2200;
+}
+
+.store-nav button {
+  background: transparent;
+  border: 1px solid #ff2200;
+  color: #ff2200;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-family: monospace;
+  border-radius: 4px;
+}
+
+.store-nav button:hover {
+  background: #ff2200;
+  color: black;
+}
+
+h2, h3 {
+  text-shadow: 0 0 8px #ff2200;
+  text-align: center;
+}
+
+main {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+.codex-entry {
+  border: 1px solid #ff2200;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: #110000;
+  border-radius: 6px;
 }
