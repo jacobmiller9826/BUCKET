@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BUCKET – About</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="store-nav">
+    <h1><a href="index.html">BUCKET</a></h1>
+    <a href="main.html">Art</a>
+    <a href="main.html">Clothing</a>
+    <a href="about.html">About</a>
+    <a href="codex.html">Codex</a>
+    <a href="generator.html">Generator</a>
+    <button id="audioToggle" onclick="toggleRitualAudio()">🎧 Toggle Ritual Audio</button>
+  </nav>
+
+  <main>
+    <section>
+      <h2>About BUCKET</h2>
+      <p>
+        BUCKET is more than art and clothing. It is a Sith-inspired ritual for those who embrace the Shadow.
+        Our creations channel the ancient codes of the Dark Side into modern form.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    function toggleRitualAudio() {
+      if (window.toggleRitualAudio) {
+        window.toggleRitualAudio();
+      } else {
+        alert("Ritual audio not available.");
+      }
+    }
+  </script>
+</body>
+</html>
