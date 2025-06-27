@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BUCKET – Art & Clothing</title>
+  <title>BUCKET – Store</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -14,113 +14,94 @@
     <a href="about.html">About</a>
     <a href="codex.html">Codex</a>
     <a href="generator.html">Generator</a>
-    <button id="audioToggle" onclick="toggleRitualAudio()">🎧 Toggle Ritual Audio</button>
   </nav>
 
   <header>
-    <h1>ART & CLOTHING</h1>
-    <p>Unleash the Dark Side with each unique piece. Choose wisely.</p>
+    <h1>BUCKET STORE</h1>
+    <p>Dark, Experimental, Sith-inspired Art & Clothing</p>
   </header>
 
   <main>
-    <section>
-      <button class="buyBtn" data-product="Sith Robe">Buy Sith Robe</button>
-      <button class="buyBtn" data-product="Bucket Painting">Buy Bucket Painting</button>
-      <button class="buyBtn" data-product="Ancient Sigil Shirt">Buy Ancient Sigil Shirt</button>
-      <button class="buyBtn" data-product="Dark Side Hoodie">Buy Dark Side Hoodie</button>
+    <section class="products">
+      <div class="product">
+        <h2>Dark Ritual Painting</h2>
+        <p>$50</p>
+        <button class="buyBtn">Buy</button>
+      </div>
+      <div class="product">
+        <h2>Sith Bucket T-Shirt</h2>
+        <p>$35</p>
+        <button class="buyBtn">Buy</button>
+      </div>
+      <div class="product">
+        <h2>Grim Reaper Hoodie</h2>
+        <p>$65</p>
+        <button class="buyBtn">Buy</button>
+      </div>
+      <div class="product">
+        <h2>Ancient Sigil Canvas</h2>
+        <p>$80</p>
+        <button class="buyBtn">Buy</button>
+      </div>
     </section>
   </main>
 
-  <!-- Modal copied from index for consistency -->
-  <div id="buyModal" class="modal">
+  <!-- Ancient Chant Modal -->
+  <div id="chantModal" class="modal">
     <div class="modal-content">
-      <span class="close" id="buyModalClose">&times;</span>
-      <h2>Ritual Purchase</h2>
-      <p>Type the ancient chant to proceed:</p>
-      <input type="text" id="chantInput" placeholder="Enter ancient chant here" autocomplete="off" />
-      <button id="chantSubmitBtn" disabled>Invoke</button>
-      <p id="chantMessage"></p>
-      <button id="confirmPurchaseBtn" disabled>Confirm Purchase</button>
+      <span class="close" id="closeChant">&times;</span>
+      <h2>Type the Ancient Chant</h2>
+      <p id="chantText">Repeat this to proceed:</p>
+      <input type="text" id="chantInput" placeholder="Type the chant exactly" />
+      <button id="chantSubmit">Unlock</button>
+      <p id="chantFeedback"></p>
     </div>
   </div>
 
   <script>
-    function toggleRitualAudio() {
-      if (window.toggleRitualAudio) {
-        window.toggleRitualAudio();
-      } else {
-        alert("Ritual audio not available.");
-      }
-    }
+    // Buy button + chant modal logic
+    const chants = [
+      "Darth Nihilus",
+      "Korriban Shadows",
+      "Sithis Eternus",
+      "Red Sun Burns",
+      "Bucket Omnia",
+      "Consume the Light",
+      "Umbra Vitae"
+    ];
 
-    // Modal functionality
-    const buyModal = document.getElementById("buyModal");
-    const buyModalClose = document.getElementById("buyModalClose");
-    const buyButtons = document.querySelectorAll(".buyBtn");
+    let chosenChant = "";
 
-    buyButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        openBuyModal(btn.dataset.product);
+    document.querySelectorAll('.buyBtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        openChantModal();
       });
     });
 
-    function openBuyModal(productName) {
-      buyModal.style.display = "block";
-      resetModal();
-      document.querySelector(".modal-content h2").textContent = `Ritual Purchase: ${productName}`;
+    function openChantModal() {
+      chosenChant = chants[Math.floor(Math.random() * chants.length)];
+      document.getElementById('chantText').textContent = `Repeat this to proceed: "${chosenChant}"`;
+      document.getElementById('chantInput').value = "";
+      document.getElementById('chantFeedback').textContent = "";
+      document.getElementById('chantModal').style.display = 'block';
     }
 
-    buyModalClose.onclick = () => {
-      buyModal.style.display = "none";
-    };
-
-    window.onclick = (event) => {
-      if (event.target === buyModal) {
-        buyModal.style.display = "none";
-      }
-    };
-
-    const correctChant = "embrace the shadow within";
-    const chantInput = document.getElementById("chantInput");
-    const chantSubmitBtn = document.getElementById("chantSubmitBtn");
-    const chantMessage = document.getElementById("chantMessage");
-    const confirmPurchaseBtn = document.getElementById("confirmPurchaseBtn");
-
-    chantInput.addEventListener("input", () => {
-      chantSubmitBtn.disabled = chantInput.value.trim().length === 0;
-      chantMessage.textContent = "";
-      confirmPurchaseBtn.disabled = true;
+    document.getElementById('closeChant').addEventListener('click', () => {
+      document.getElementById('chantModal').style.display = 'none';
     });
 
-    chantSubmitBtn.addEventListener("click", () => {
-      validateChant();
-    });
-
-    function validateChant() {
-      const userChant = chantInput.value.trim().toLowerCase();
-      if (userChant === correctChant) {
-        chantMessage.style.color = "#22ff22";
-        chantMessage.textContent = "The chant is accepted... Proceed with your ritual.";
-        confirmPurchaseBtn.disabled = false;
+    document.getElementById('chantSubmit').addEventListener('click', () => {
+      const userInput = document.getElementById('chantInput').value.trim();
+      if (userInput === chosenChant) {
+        document.getElementById('chantFeedback').textContent = "The Dark Side accepts you.";
+        setTimeout(() => {
+          document.getElementById('chantModal').style.display = 'none';
+          alert("Transaction Complete! (You can now process payment or redirect.)");
+        }, 1000);
       } else {
-        chantMessage.style.color = "#ff4444";
-        chantMessage.textContent = "The Dark Side denies you. Speak true or be forever lost.";
-        confirmPurchaseBtn.disabled = true;
+        document.getElementById('chantFeedback').textContent = "The ritual fails! Try again...";
       }
-    }
-
-    confirmPurchaseBtn.addEventListener("click", () => {
-      alert("The ritual is complete. Your purchase is confirmed.");
-      buyModal.style.display = "none";
-      resetModal();
     });
-
-    function resetModal() {
-      chantInput.value = "";
-      chantSubmitBtn.disabled = true;
-      chantMessage.textContent = "";
-      confirmPurchaseBtn.disabled = true;
-    }
   </script>
 </body>
 </html>
