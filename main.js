@@ -1,3 +1,4 @@
+// ---- Ritual Buy ----
 function startRitual(button) {
   document.getElementById('ritualModal').style.display = 'block';
   document.getElementById('chantResult').textContent = '';
@@ -29,8 +30,38 @@ function startCountdown() {
       timerText.textContent = "✅ Ritual complete. Proceed to checkout.";
       document.getElementById('finalBuy').style.display = 'inline-block';
       document.getElementById('finalBuy').onclick = () => {
+        localStorage.setItem('bucketUnlocked_knight', 'yes');
         window.location.href = 'https://your-checkout-link-here.com';
       };
     }
   }, 1000);
 }
+
+// ---- Wallet Connect ----
+async function connectWallet() {
+  if (typeof window.ethereum !== 'undefined') {
+    try {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const wallet = accounts[0];
+      localStorage.setItem('bucketWallet', wallet);
+      displayWallet(wallet);
+    } catch (err) {
+      console.error('User rejected request');
+    }
+  } else {
+    alert('No Ethereum wallet detected. Please install MetaMask.');
+  }
+}
+
+function displayWallet(wallet) {
+  document.getElementById('walletAddress').textContent = `🪙 ${wallet.slice(0,6)}...${wallet.slice(-4)}`;
+}
+
+document.getElementById('connectWalletBtn').addEventListener('click', connectWallet);
+
+window.addEventListener('DOMContentLoaded', () => {
+  const savedWallet = localStorage.getItem('bucketWallet');
+  if (savedWallet) {
+    displayWallet(savedWallet);
+  }
+});
