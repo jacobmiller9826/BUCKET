@@ -25,6 +25,7 @@
   <main>
     <canvas id="sigilCanvas"></canvas>
     <button id="generateBtn">Generate New Sigil</button>
+    <button id="saveBtn">Save Sigil</button>
   </main>
 
   <script>
@@ -46,6 +47,7 @@
     }
 
     document.getElementById('generateBtn').addEventListener('click', drawSigil);
+    document.getElementById('saveBtn').addEventListener('click', saveSigil);
 
     function drawSigil() {
       ctx.fillStyle = 'black';
@@ -98,6 +100,13 @@
         ctx.arc(x, y, 15, 0, Math.PI * 2);
         ctx.fill();
       }
+    }
+
+    function saveSigil() {
+      const link = document.createElement('a');
+      link.download = 'bucket_sigil.png';
+      link.href = canvas.toDataURL();
+      link.click();
     }
   </script>
 </body>
