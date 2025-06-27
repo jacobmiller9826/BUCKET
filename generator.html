@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BUCKET – Generator</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -14,18 +14,26 @@
     <a href="about.html">About</a>
     <a href="codex.html">Codex</a>
     <a href="generator.html">Generator</a>
+    <button id="audioToggle" onclick="toggleRitualAudio()">🎧 Toggle Ritual Audio</button>
   </nav>
 
-  <section class="generator">
-    <h2>☠️ Perform the Sith Ritual to Summon Art ☠️</h2>
-    <p>Enter your dark prompt:</p>
-    <input type="text" id="promptInput" placeholder="e.g. 'desert ruin'">
-    <button onclick="performRitual()">Perform Ritual</button>
-    <p id="ritualStatus"></p>
-    <canvas id="artCanvas" width="500" height="500"></canvas>
-    <button id="saveBtn" style="display:none;" onclick="saveImage()">Download Vision</button>
-  </section>
+  <main>
+    <section>
+      <h2>Generative Ritual Art</h2>
+      <p>
+        Create your own BUCKET-inspired sigils and glyphs. Coming soon...
+      </p>
+    </section>
+  </main>
 
-  <script src="generator.js"></script>
+  <script>
+    function toggleRitualAudio() {
+      if (window.toggleRitualAudio) {
+        window.toggleRitualAudio();
+      } else {
+        alert("Ritual audio not available.");
+      }
+    }
+  </script>
 </body>
 </html>
