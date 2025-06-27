@@ -1,64 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BUCKET – Main</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BUCKET – Art & Clothing</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Modal styling */
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 9999; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgba(0,0,0,0.85); 
+      backdrop-filter: blur(6px);
+    }
+    .modal-content {
+      background-color: #110000;
+      margin: 10% auto; 
+      padding: 20px;
+      border: 2px solid #ff2200;
+      border-radius: 10px;
+      max-width: 400px;
+      box-shadow: 0 0 30px #ff2200;
+      color: #ff2200;
+      font-family: monospace;
+      text-align: center;
+    }
+    .close {
+      color: #ff2200;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+    }
+    .close:hover {
+      color: #ff4444;
+    }
+    /* Chant input and buttons */
+    #chantInput {
+      width: 100%;
+      padding: 8px;
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #ff2200;
+      background: #110000;
+      border: 1px solid #ff2200;
+      border-radius: 4px;
+    }
+    #chantSubmitBtn, #confirmPurchaseBtn {
+      margin-top: 10px;
+      padding: 10px 16px;
+      font-family: monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid #ff2200;
+      background: transparent;
+      color: #ff2200;
+      transition: background-color 0.3s ease;
+    }
+    #chantSubmitBtn:hover:not(:disabled),
+    #confirmPurchaseBtn:hover:not(:disabled) {
+      background: #ff2200;
+      color: black;
+    }
+    #confirmPurchaseBtn {
+      border: none;
+      background: #ff2200;
+      color: black;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    #chantMessage {
+      color: #ff4444;
+      font-style: italic;
+      margin-top: 8px;
+      min-height: 24px;
+    }
+  </style>
 </head>
 <body>
+
   <nav class="store-nav">
     <h1><a href="index.html">BUCKET</a></h1>
     <a href="main.html">Art</a>
     <a href="main.html">Clothing</a>
     <a href="about.html">About</a>
     <a href="codex.html">Codex</a>
-    <button id="connectWalletBtn">Connect Wallet</button>
-    <span id="walletAddress"></span>
+    <a href="generator.html">Generator</a>
+    <button id="audioToggle" onclick="toggleRitualAudio()">🎧 Toggle Ritual Audio</button>
   </nav>
 
-  <h2 style="text-align:center; margin-top:2rem;">☠️ BUCKET SITH COLLECTION ☠️</h2>
+  <main>
+    <!-- Your art and clothing product listings with buy buttons -->
+    <section id="products" style="padding: 2rem;">
+      <h2>Art & Clothing</h2>
+      <button class="buyBtn" data-product="Sith Robe">Buy Sith Robe</button>
+      <button class="buyBtn" data-product="Bucket Painting">Buy Bucket Painting</button>
+      <!-- Add more products as needed -->
+    </section>
+  </main>
 
-  <div class="product-grid">
-    <div class="product-card">
-      <div class="product-img"></div>
-      <h2>Sand Relic Print</h2>
-      <p class="price">$50</p>
-      <button onclick="startRitual(this)">BUY</button>
-    </div>
-    <div class="product-card">
-      <div class="product-img"></div>
-      <h2>Temple Vision</h2>
-      <p class="price">$80</p>
-      <button onclick="startRitual(this)">BUY</button>
-    </div>
-    <div class="product-card">
-      <div class="product-img"></div>
-      <h2>Blood Moon Canvas</h2>
-      <p class="price">$120</p>
-      <button onclick="startRitual(this)">BUY</button>
-    </div>
-    <div class="product-card">
-      <div class="product-img"></div>
-      <h2>Obsidian Cloak</h2>
-      <p class="price">$150</p>
-      <button onclick="startRitual(this)">BUY</button>
-    </div>
-  </div>
-
-  <!-- Ritual Modal -->
-  <div id="ritualModal" class="ritual-modal">
-    <div class="ritual-content">
-      <h2>☠️ Perform the Sith Ritual ☠️</h2>
+  <!-- Buy Modal -->
+  <div id="buyModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="buyModalClose">&times;</span>
+      <h2>Ritual Purchase</h2>
       <p>Type the ancient chant to proceed:</p>
-      <input type="text" id="chantInput" placeholder="Enter the chant">
-      <button onclick="checkChant()">Submit</button>
-      <div id="chantResult"></div>
-      <p id="timerText"></p>
-      <button id="finalBuy" style="display:none;">Proceed to Checkout</button>
+
+      <input 
+        type="text" 
+        id="chantInput" 
+        placeholder="Enter ancient chant here" 
+        autocomplete="off" 
+      />
+      
+      <button id="chantSubmitBtn" disabled>Invoke</button>
+
+      <p id="chantMessage"></p>
+
+      <button id="confirmPurchaseBtn" disabled>Confirm Purchase</button>
     </div>
   </div>
 
-  <script src="main.js"></script>
+  <script>
+    // Modal open/close
+    const buyModal = document.getElementById("buyModal");
+    const buyModalClose = document.getElementById("buyModalClose");
+    const buyButtons = document.querySelectorAll(".buyBtn");
+
+    buyButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        openBuyModal(btn.dataset.product);
+      });
+    });
+
+    function openBuyModal(productName) {
+      buyModal.style.display = "block";
+      resetModal();
+      document.querySelector(".modal-content h2").textContent = `Ritual Purchase: ${productName}`;
+    }
+
+    buyModalClose.onclick = () => {
+      buyModal.style.display = "none";
+    };
+
+    window.onclick = (event) => {
+      if (event.target === buyModal) {
+        buyModal.style.display = "none";
+      }
+    };
+
+    // Chant validation and purchase flow
+    const correctChant = "embrace the shadow within";
+
+    const chantInput = document.getElementById("chantInput");
+    const chantSubmitBtn = document.getElementById("chantSubmitBtn");
+    const chantMessage = document.getElementById("chantMessage");
+    const confirmPurchaseBtn = document.getElementById("confirmPurchaseBtn");
+
+    chantInput.addEventListener("input", () => {
+      chantSubmitBtn.disabled = chantInput.value.trim().length === 0;
+      chantMessage.textContent = "";
+      confirmPurchaseBtn.disabled = true;
+    });
+
+    chantSubmitBtn.addEventListener("click", () => {
+      validateChant();
+    });
+
+    function validateChant() {
+      const userChant = chantInput.value.trim().toLowerCase();
+      if (userChant === correctChant) {
+        chantMessage.style.color = "#22ff22";
+        chantMessage.textContent = "The chant is accepted... Proceed with your ritual.";
+        confirmPurchaseBtn.disabled = false;
+      } else {
+        chantMessage.style.color = "#ff4444";
+        chantMessage.textContent = "The Dark Side denies you. Speak true or be forever lost.";
+        confirmPurchaseBtn.disabled = true;
+      }
+    }
+
+    confirmPurchaseBtn.addEventListener("click", () => {
+      alert("The ritual is complete. Your purchase is confirmed.");
+      buyModal.style.display = "none";
+      resetModal();
+      // TODO: Add your purchase completion logic here
+    });
+
+    function resetModal() {
+      chantInput.value = "";
+      chantSubmitBtn.disabled = true;
+      chantMessage.textContent = "";
+      confirmPurchaseBtn.disabled = true;
+    }
+
+    // Ritual Audio Toggle (if ritualaudio.js exists)
+    function toggleRitualAudio() {
+      if (window.toggleRitualAudio) {
+        window.toggleRitualAudio();
+      } else {
+        alert("Ritual audio not available.");
+      }
+    }
+  </script>
+
 </body>
 </html>
