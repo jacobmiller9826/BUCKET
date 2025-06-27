@@ -22,7 +22,6 @@ nav.store-nav button {
   color: #ff2200;
   text-decoration: none;
   font-weight: bold;
-  font-family: monospace;
   background: none;
   border: none;
   cursor: pointer;
@@ -54,6 +53,24 @@ main {
   padding: 0 1rem;
 }
 
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+.product {
+  border: 2px solid #ff2200;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+  background-color: black;
+}
+
+.product:hover {
+  transform: scale(1.05);
+}
+
 button {
   padding: 12px 24px;
   border: 2px solid #ff2200;
@@ -64,8 +81,6 @@ button {
   border-radius: 4px;
   animation: buyPulse 2s infinite ease-in-out;
   transition: background 0.3s ease, color 0.3s ease;
-  display: block;
-  margin: 1rem auto;
 }
 
 button:hover {
@@ -82,27 +97,30 @@ button:hover {
 .modal {
   display: none;
   position: fixed;
-  z-index: 100;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.9);
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.95);
 }
 
 .modal-content {
   background-color: black;
   color: #ff2200;
-  margin: auto;
+  margin: 10% auto;
   padding: 2rem;
   border: 2px solid #ff2200;
-  width: 90%;
-  max-width: 500px;
+  max-width: 400px;
   text-align: center;
   font-family: monospace;
   position: relative;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-content p {
+  margin-bottom: 1rem;
 }
 
 .close {
@@ -128,12 +146,4 @@ input[type="text"] {
   width: 80%;
   margin: 1rem auto;
   display: block;
-}
-
-#sigilCanvas {
-  display: block;
-  margin: 2rem auto;
-  background-color: black;
-  border: 2px solid #ff2200;
-  max-width: 100%;
 }
