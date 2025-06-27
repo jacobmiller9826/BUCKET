@@ -3,10 +3,24 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const entries = {
-  bucketToken_art1: "✴️ 'In the sand lies memory. In memory, war.'",
-  bucketToken_cloth1: "🩸 'The hood hides the face. The face hides the fire.'"
-};
+const entries = [
+  {
+    text: "✴️ 'In the sand lies memory. In memory, war.'",
+    unlockDay: 0
+  },
+  {
+    text: "🩸 'The hood hides the face. The face hides the fire.'",
+    unlockDay: 3
+  },
+  {
+    text: "🔥 'Darkness feeds those who dare speak its name.'",
+    unlockDay: 7
+  },
+  {
+    text: "💀 'The ancient Temple is alive. It listens.'",
+    unlockDay: 10
+  }
+];
 
 const messages = [
   "⚡ Only the worthy may draw from the shadows.",
@@ -33,28 +47,46 @@ function drawRunes() {
 
 function showEntries() {
   const container = document.getElementById("codexEntries");
+  const firstVisitDate = getOrSetFirstVisit();
+  const daysSince = daysSinceFirstVisit(firstVisitDate);
   let unlockedCount = 0;
 
-  for (const token in entries) {
-    if (localStorage.getItem(token)) {
+  entries.forEach(entry => {
+    if (daysSince >= entry.unlockDay) {
       const div = document.createElement("div");
-      div.textContent = entries[token];
+      div.textContent = entry.text;
       div.className = "entry-unlocked";
       container.appendChild(div);
       unlockedCount++;
     }
-  }
+  });
 
   updateRank(unlockedCount);
+}
+
+function getOrSetFirstVisit() {
+  let stored = localStorage.getItem("bucketFirstVisit");
+  if (!stored) {
+    const today = new Date().toISOString();
+    localStorage.setItem("bucketFirstVisit", today);
+    return today;
+  }
+  return stored;
+}
+
+function daysSinceFirstVisit(firstDate) {
+  const first = new Date(firstDate);
+  const now = new Date();
+  return Math.floor((now - first) / (1000 * 60 * 60 * 24));
 }
 
 function updateRank(count) {
   const rankDisplay = document.getElementById("rankDisplay");
   let rank = "Initiate";
 
-  if (count === 1) rank = "Acolyte";
-  else if (count === 2) rank = "Apprentice";
-  else if (count >= Object.keys(entries).length) rank = "Dark Lord";
+  if (count >= 2) rank = "Acolyte";
+  if (count >= 3) rank = "Apprentice";
+  if (count >= entries.length) rank = "Dark Lord";
 
   rankDisplay.textContent = `☠ Rank: ${rank}`;
 }
