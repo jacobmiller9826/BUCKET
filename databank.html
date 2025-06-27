@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BUCKET – Lore Terminal</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Terminal style overrides */
+    body {
+      background: black;
+      color: #ff2200;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 1rem;
+      user-select: none;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 {
+      text-shadow: 0 0 8px #ff3300;
+    }
+    .terminal {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: #110000;
+      border: 2px solid #ff2200;
+      padding: 1rem 2rem;
+      box-shadow: 0 0 30px #ff2200aa;
+      border-radius: 10px;
+    }
+    .section {
+      margin-bottom: 2rem;
+      border-bottom: 1px dotted #ff3300;
+      padding-bottom: 1rem;
+    }
+    .section h3 {
+      cursor: pointer;
+      user-select: text;
+      position: relative;
+    }
+    .section h3:hover {
+      color: #ff5555;
+    }
+    .encrypted {
+      font-family: monospace;
+      font-size: 1.1rem;
+      color: #440000;
+      letter-spacing: 2px;
+      text-shadow: 0 0 2px #330000;
+      cursor: pointer;
+      user-select: text;
+      white-space: pre-wrap;
+      max-height: 100px;
+      overflow: hidden;
+      transition: max-height 1s ease;
+    }
+    .encrypted.unlocked {
+      color: #ff2200;
+      max-height: 500px;
+      text-shadow: 0 0 8px #ff3300;
+    }
+    .decrypted-text {
+      margin-top: 0.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+      line-height: 1.4;
+      color: #ff4422;
+      text-shadow: 0 0 10px #ff2200;
+      white-space: pre-wrap;
+      user-select: text;
+    }
+    .unlock-btn {
+      background: transparent;
+      border: 1px solid #ff2200;
+      color: #ff2200;
+      padding: 0.2rem 0.6rem;
+      font-family: monospace;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .unlock-btn:hover {
+      background: #ff2200;
+      color: black;
+    }
+    #blockchainStatus {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #ff6666;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <nav class="store-nav">
+    <h1><a href="index.html">BUCKET</a></h1>
+    <a href="main.html">Art</a>
+    <a href="main.html">Clothing</a>
+    <a href="about.html">About</a>
+    <a href="codex.html">Codex</a>
+    <a href="generator.html">Generator</a>
+    <button id="audioToggle" onclick="toggleRitualAudio()">🎧 Toggle Ritual Audio</button>
+  </nav>
+
+  <main class="terminal">
+    <h2>☠️ BUCKET Lore Terminal ☠️</h2>
+    <p>Click each encrypted section to <em>decrypt</em> the dark lore.</p>
+
+    <div class="section" id="sec1">
+      <h3>Encrypted Sith Prophecy</h3>
+      <pre class="encrypted" onclick="toggleDecrypt(this)">4a 69 6e 74 20 74 68 65 20 64 61 72 6b 20 73 69 64 65 20 6f 66 20 62 75 63 6b 65 74</pre>
+      <div class="decrypted-text" style="display:none;">
+        Join the dark side of bucket.
+      </div>
+    </div>
+
+    <div class="section" id="sec2">
+      <h3>Mysterious Bucket Vision</h3>
+      <pre class="encrypted" onclick="toggleDecrypt(this)">54 68 65 20 63 72 6f 77 6e 20 72 69 73 65 73 20 69 6e 20 74 68 65 20 64 65 73 65 72 74</pre>
+      <div class="decrypted-text" style="display:none;">
+        The crown rises in the desert.
+      </div>
+    </div>
+
+    <div class="section" id="sec3" style="border-bottom:none;">
+      <h3>Secret Sith Holocron (Blockchain Locked)</h3>
+      <button class="unlock-btn" onclick="checkLoreNFT()">Attempt Decrypt</button>
+      <div id="blockchainStatus"></div>
+      <div class="decrypted-text" id="blockchainLore" style="display:none; margin-top: 1rem;">
+        ⚠️ Only those who wield the Bucket NFT may behold this truth.  
+        <br><br>
+        The end is the beginning, and the beginning is the end. The cycle breaks with the chosen.
+      </div>
+    </div>
+  </main>
+
+  <script src="ritualaudio.js"></script>
+  <script src="databank.js"></script>
+</body>
+</html>
